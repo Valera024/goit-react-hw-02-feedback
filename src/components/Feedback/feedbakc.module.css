@@ -1,0 +1,31 @@
+.btn {
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 70px;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+.good {
+  background-color: green;
+  color: white;
+}
+
+.neutral {
+  background-color: orange;
+  color: white;
+}
+
+.bad {
+  background-color: red;
+  color: white;
+}
+
+.text {
+  font-weight: 600;
+}
