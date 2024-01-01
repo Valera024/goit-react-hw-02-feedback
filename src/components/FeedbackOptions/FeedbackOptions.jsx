@@ -9,7 +9,7 @@ class FeedbackOptions extends Component {
                 {options.map((option) => (
                     <li key={option} className={styles.element}>
                         <button onClick={() => onLeaveFeedback(option)} type="button" className={`${styles.btn} ${styles[option]}`}>
-                            {option.charAt(0).toUpperCase() + option.slice(1) }
+                            {option.charAt(0).toUpperCase() + option.slice(1)}
                         </button>
                     </li>
                 ))}
