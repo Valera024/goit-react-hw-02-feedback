@@ -1,4 +1,4 @@
-import {  Children, Component } from "react";
+import {  Component } from "react";
 import styles from "./section.module.css"
 
 class Section extends Component {
