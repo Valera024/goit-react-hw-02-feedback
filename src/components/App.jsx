@@ -8,47 +8,38 @@ class App extends Component {
   state = {
         good: 0,
         neutral: 0,
-        bad: 0,
-        total: 0,
-        positive: 0,
-      btnClick: false
+        bad: 0
     }
 
     countTotalFeedback = () => {
-        this.setState(prevState => ({
-            total: prevState.good + prevState.neutral + prevState.bad
-        }),
-            () => this.countPositiveFeedbackPercentage()
-        )
+        const { good, neutral, bad } = this.state;
+        return good + neutral + bad
     }
 
     countPositiveFeedbackPercentage = () => {
-        this.setState(prevState => {
-            return { positive: Math.trunc((prevState.good / prevState.total) * 100) }
-        })
+        const { good } = this.state;
+        return Math.round((good * 100) / this.countTotalFeedback())
     }
 
     handleClick = (btnId) => {
         this.setState(prevState => ({
-            btnClick: true,
             [btnId]: prevState[btnId] + 1
-            }),
-            () => this.countTotalFeedback()
+            })
         )
   }
   
   render() {
-    const { good, neutral, bad, total, positive, btnClick } = this.state;
+    const { good, neutral, bad } = this.state;
         return (
             <>
                 <Section title="Please leave feedback">
                     <FeedbackOptions options={["good", "neutral", "bad"]} onLeaveFeedback={this.handleClick} />
                 </Section>
                 <Section title="Statistics">
-                    {btnClick ? (
-                        <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={positive} />
+                    {this.countTotalFeedback() > 0  ? (
+                        <Statistics good={good} neutral={neutral} bad={bad} total={this.countTotalFeedback()} positivePercentage={this.countPositiveFeedbackPercentage()} />
                         ) : (
-                        <Notification message="There is no feedback"/>
+                            <Notification message="There is no feedback"/>
                     )}
                 </Section>
             </>
